@@ -4,21 +4,20 @@ import ImagePicker from "react-native-image-picker";
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import {NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator} from '@react-navigation/native-stack';
+import Profile from '../components/Profile';
+
 
 const Stack = createNativeStackNavigator();
 
 
 export default function Home({navigation}){
-const state = {
-    photo: null,
-}
 
-const[name, setName] = useState();
-const[surname, setSurname] = useState();
-const[email, setEmail] = useState();
-const[address, setAddress] = useState();
-const[phone, setPhone] = useState();
-const[image, setImage] = useState();
+  const[name, setName] = useState();
+  const[surname, setSurname] = useState();
+  const[email, setEmail] = useState();
+  const[address, setAddress] = useState();
+  const[phone, setPhone] = useState();
+  const[image, setImage] = useState();
 
 
 const  chooseFile = () => {
@@ -48,63 +47,59 @@ const  chooseFile = () => {
     });
   };
 
-const clickHandler = () => {
-  setName(name);
-  setSurname(surname);
-  setEmail(email);
-  setAddress(address);
-  setPhone(phone);
+  const clickHandler = () => {
+    Profile.name = name;
+    Profile.surname = surname;
+    Profile.email = email;
+    Profile.address = address;
+    Profile.phone = phone;
+    Profile.image = image;
+    
+    navigation.navigate('previewDetails');
+  }
 
+    return (
+            <View style={styles.container}>
+              <Text>Enter Your Name:</Text>
+              <TextInput multiline style={styles.input} 
+              placeholder= 'Buhle'
+              onChangeText={(val) => setName(val)}/>
+          
+              <Text>Enter Your Surname:</Text>
+              <TextInput multiline style={styles.input} 
+              placeholder= 'Mabhena'
+              onChangeText={(val) => setSurname(val)}/>
+          
+              <Text>Enter Your Email:</Text>
+              <TextInput multiline style={styles.input} 
+              placeholder= 'Buhle@gmail.com'
+              onChangeText={(val) => setEmail(val)}/>
+          
+              <Text>Enter Your Address:</Text>
+              <TextInput style={styles.input} 
+              placeholder= '13 Smith Street'
+              onChangeText={(val) => setAddress(val)}/>
+          
+              <Text>Enter Your Phone:</Text>
+              <TextInput keyboardType='numeric'
+              style={styles.input} 
+              placeholder= '0761555555'
+              onChangeText={(val) => setPhone(val)}/>
+          
+              
+              <View>
+                  <Button title='Choose Image' onPress={() =>chooseFile()} />
+              </View>
+              <View style={styles.buttnContainer}>
+              <Button title='Submit Details' onPress={clickHandler} />
+              </View>
+              </View>
+              
+    )
 }
 
-return (
-  <View style={styles.container}>
-    <Text>Enter Your Name:</Text>
-    <TextInput multiline style={styles.input} 
-    placeholder= 'Buhle'
-    onChangeText={(val) => setName(val)}/>
 
-    <Text>Enter Your Surname:</Text>
-    <TextInput multiline style={styles.input} 
-    placeholder= 'Mabhena'
-    onChangeText={(val) => setSurname(val)}/>
 
-    <Text>Enter Your Email:</Text>
-    <TextInput multiline style={styles.input} 
-    placeholder= 'Buhle@gmail.com'
-    onChangeText={(val) => setEmail(val)}/>
-
-    <Text>Enter Your Address:</Text>
-    <TextInput style={styles.input} 
-    placeholder= '13 Smith Street'
-    onChangeText={(val) => setAddress(val)}/>
-
-    <Text>Enter Your Phone:</Text>
-    <TextInput keyboardType='numeric'
-    style={styles.input} 
-    placeholder= '0761555555'
-    onChangeText={(val) => setPhone(val)}/>
-
-    
-    <View>
-        <Button title='Choose Image' onPress={() =>chooseFile()} />
-    </View>
-    <View style={styles.buttnContainer}>
-    <Button title='Submit Details' onPress={() => {navigation.navigate('previewDetails',{
-      name:name,
-      surname:surname,
-      email:email,
-      address:address,
-      phone:phone,
-      image:image,
-      }
-      )}} />
-    </View>
-    </View>
-    
-)
-
-}
 const styles = StyleSheet.create({
 container:{
   flex: 1,

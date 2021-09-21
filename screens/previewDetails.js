@@ -2,25 +2,25 @@ import React from 'react';
 import {SafeAreaView,ScrollView,StatusBar,StyleSheet,Card, Text,useColorScheme, View, Button, TextInput, Image} from 'react-native';
 import {NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator} from '@react-navigation/native-stack';
+import Profile from '../components/Profile';
 
-export default function ReviewDetails({route, navigation}) {
-    const {name, surname, email, address, phone, image} = route.params;
-    console.log(image);
+export default function ReviewDetails({navigation}) {
+
     return(
         <View style={styles.container}>
             <ScrollView>
-            <Text style={styles.heading}> Welcome : {name} </Text>
-            <Image style={styles.image} source={{uri:image}} />
+            <Text style={styles.heading}> Welcome : {Profile.name} </Text>
+            <Image style={styles.image} source={{uri:Profile.image}} />
             <View style={styles.card}>
-            <Text >Name: {name}</Text>
+            <Text >Name: {Profile.name}</Text>
             <Text></Text>
-            <Text >Surname: {surname}</Text>
+            <Text >Surname: {Profile.surname}</Text>
             <Text></Text>
-            <Text >Email: {email}</Text>
+            <Text >Email: {Profile.email}</Text>
             <Text></Text>
-            <Text >Address: {address}</Text>
+            <Text >Address: {Profile.address}</Text>
             <Text></Text>
-            <Text >Cellphone: {phone}</Text>
+            <Text >Cellphone: {Profile.phone}</Text>
             <Text></Text>
             </View>
             </ScrollView>
